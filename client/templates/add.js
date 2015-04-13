@@ -5,7 +5,7 @@ Template.add.events({
 		event.preventDefault();
 		var labelEl = event.target.label;
 		
-		geolist.collections.Items.update({
+		Items.update({
 			userId: Meteor.userId(),
 			label: labelEl.value
 		}, {

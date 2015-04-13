@@ -1,5 +1,8 @@
 <template name='layout'>
-	{{> loginButtons}}
+    {{> header}}
+    
+	<div class='container'>
+        {{> yield}}    
+    </div>
 	
-	{{> yield}}
 </template>

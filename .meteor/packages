@@ -7,5 +7,8 @@
 meteor-platform
 autopublish
 iron:router
-accounts-ui
 accounts-password
+twbs:bootstrap
+ian:accounts-ui-bootstrap-3
+zimme:iron-router-active
+schickm:helpers

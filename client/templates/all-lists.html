@@ -1,0 +1,13 @@
+<template name='allLists'>
+	<h2>All Lists</h2>
+    {{#linkTo route='createList'}}
+        + New List
+    {{/linkTo}}
+    <ul>
+        {{#each lists}}
+            <li>{{this.name}}</li>
+        {{/each}}
+    </ul>
+
+	<a href='{{pathFor "add"}}'>add item</a>
+</template>
