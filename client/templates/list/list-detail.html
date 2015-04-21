@@ -1,3 +1,16 @@
 <template name='listDetail'>
-    <h2>{{this.name}}</h2>
+    <h2>
+        {{list.name}}
+        {{#linkTo route='shareList' data=list}}
+            <span class='glyphicon glyphicon-share'></span>
+        {{/linkTo}}
+    </h2>
+
+    <ul>
+        {{#each itemsSorted}}
+            {{> itemDetail}}
+        {{/each}}
+    </ul>
+
+    {{#linkTo route='addItem' data=list}}add item{{/linkTo}}
 </template>

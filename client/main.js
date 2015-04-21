@@ -1,1 +1,1 @@
-'use strict';
+Meteor.subscribe('userLists');

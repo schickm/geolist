@@ -133,8 +133,8 @@
       
       // custom global vars I make
       "Items": true,
-      "ListItems": true,
       "Lists": true,
-      "Helpers": true
+      "Helpers": true,
+      "Geolocation": false
     }
 }

@@ -5,9 +5,10 @@
     {{/linkTo}}
     <ul>
         {{#each lists}}
-            <li>{{this.name}}</li>
+            <li>{{#linkTo route='listDetail'}}
+                    {{this.name}}
+                {{/linkTo}}
+            </li>
         {{/each}}
     </ul>
-
-	<a href='{{pathFor "add"}}'>add item</a>
 </template>
