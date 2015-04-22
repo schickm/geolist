@@ -8,6 +8,6 @@ A simple example shareable todo list
 * [Restriction of routes based on mongo query](lib/router.js)
 * [Same restriction as a template helper](client/templates/list/list-detail.js)
 * [Normalizing data with ObjectID references when adding items to a list](client/templates/item/add-item.js)
-* [Prevention of UI display with {{if currentUser}}](client/templates/layout.html)
+* [Prevention of UI display with {{#if currentUser}}](client/templates/layout.html)
 
 

@@ -1,12 +1,12 @@
 <template name='layout'>
     {{> header}}
     
-	<div class='container'>
-		{{#if currentUser}}
-        	{{> yield}}    
+    <div class='container'>
+        {{#if currentUser}}
+            {{> yield}}    
         {{else}}
-        	<h2>Please login</h2>
-		{{/if}}
+            <h2>Please login</h2>
+        {{/if}}
     </div>
-	
+    
 </template>
