@@ -2,7 +2,11 @@
     {{> header}}
     
 	<div class='container'>
-        {{> yield}}    
+		{{#if currentUser}}
+        	{{> yield}}    
+        {{else}}
+        	<h2>Please login</h2>
+		{{/if}}
     </div>
 	
 </template>

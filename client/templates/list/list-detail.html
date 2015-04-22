@@ -1,9 +1,6 @@
 <template name='listDetail'>
     <h2>
         {{list.name}}
-        {{#linkTo route='shareList' data=list}}
-            <span class='glyphicon glyphicon-share'></span>
-        {{/linkTo}}
     </h2>
 
     <ul>
@@ -12,5 +9,10 @@
         {{/each}}
     </ul>
 
-    {{#linkTo route='addItem' data=list}}add item{{/linkTo}}
+    {{#linkTo class='action-link' route='addItem' data=list}}add item{{/linkTo}}
+    {{#if canShareList}}
+        {{#linkTo class='action-link' route='shareList' data=list}}
+            share with others
+        {{/linkTo}}
+    {{/if}}
 </template>

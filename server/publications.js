@@ -1,23 +1,17 @@
 Meteor.publish('userLists', function() {
-    return Lists.find({$or: [
-        {userId: this.userId},
-        {sharedUsers: {$in: [this.userId]}}
-    ]});
+    if (this.userId) {
+        return Lists.find({$or: [
+            {userId: this.userId},
+            {sharedUsers: {$in: [this.userId]}}
+        ]});    
+    } else {
+        return this.ready();
+    }
+    
 });
 
 Meteor.publish('userItems', function(listId) {
-    // check and see if user is in that list or it is shared
-    var list = Lists.findOne({
-        $and: [
-            {_id: listId},
-            {$or: [
-                {userId: this.userId},
-                {sharedUsers: {$in: [this.userId]}
-            }
-        ]
-    }]});
-
-    if (list) {
+    if ( Helpers.userCanEditList(this.userId, listId) ) {
         return Items.find({
             listId: listId
         });    

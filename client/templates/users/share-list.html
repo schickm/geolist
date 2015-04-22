@@ -1,5 +1,8 @@
 <template name='shareList'>
-    {{#each users}}
-        {{> userDetail}}
-    {{/each}}
+	<h2>Share "{{list.name}}" with other people</h2>
+	<ul>
+	    {{#each users}}
+	        {{> userDetail}}
+	    {{/each}}
+	</ul>
 </template>
