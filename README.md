@@ -1,5 +1,5 @@
 # sharelist
-A simple example shareable todo list
+A simple example shareable todo list.  Made to accompany a lecture in App Design at Columbia College.
 
 ## Points of interest
 
