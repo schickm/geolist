@@ -2,10 +2,11 @@
 Template.listDetail.helpers({
     itemsSorted: function() {        
         return Items.find({
-                listId: Router.current().params._id,
-                done: false
+                listId: Router.current().params._id
         }, {
-            sort: ['item']
+            sort: {
+                done: 1
+            }
         });
     },
 
