@@ -10,3 +10,19 @@ ul {
 li > label > input {
 	margin-right: 5px !important;
 }
+
+.item-list {
+	padding-left: 10px;
+}
+
+.item-list li {
+	border-bottom: 1px solid #ccc;
+}
+
+.item-list li:last-of-type {
+	border-bottom: none;
+}
+
+.item-list input[type=text] {
+	border: none;
+}
