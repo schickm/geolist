@@ -17,8 +17,17 @@ Meteor.publish('userItems', function(listId) {
         });    
     } else {
         return this.ready();
-    }
-    
+    }    
+});
+
+Meteor.publish('userItemTypes', function(listId) {
+    if ( Helpers.userCanEditList(this.userId, listId) ) {
+        return ItemTypes.find({
+            listId: listId
+        });    
+    } else {
+        return this.ready();
+    }    
 });
 
 Meteor.publish('users', function() {

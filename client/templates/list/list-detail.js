@@ -22,16 +22,23 @@ Template.listDetail.helpers({
 Template.listDetail.events({
     'submit form': function(event) {
         event.preventDefault();
-        var itemEl = event.target.item;
+        var input = event.target.item,
+            itemLabel = input.value,
+            listItemDoc = {
+                userId: Meteor.userId(),
+                listId: this.list._id,
+                label: itemLabel,
+                quantity: 1,
+                lat: null,
+                lng: null,
+                done: false
+            };
 
-        // make a list item
-        Items.insert({
-            userId: Meteor.userId(),
-            listId: this.list._id,
-            item: itemEl.value,
-            done: false
+        Meteor.call('addListItem', listItemDoc, function() {
+            // blank out the input
+            input.value = '';
         });
 
-        itemEl.value = '';
+        
     }
-})
+});
