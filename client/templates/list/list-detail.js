@@ -1,13 +1,37 @@
+Number.prototype.toRad = function () {
+    return this * (Math.PI / 180);
+};
+
+function calcDistance(lat1, lon1, lat2, lon2) {
+    var R = 6371; // km
+    var dLat = (lat2-lat1).toRad();
+    var dLon = (lon2-lon1).toRad();
+    lat1 = lat1.toRad();
+    lat2 = lat2.toRad();
+
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    
+    return R * c;
+}
 
 Template.listDetail.helpers({
     itemsSorted: function() {        
-        return Items.find({
+        var itemList = Items.find({
                 listId: Router.current().params._id
-        }, {
-            sort: {
-                done: 1
-            }
-        });
+            }).fetch(),
+            position = Geolocation.currentLocation();
+
+        if (position) {
+            itemList = _.sortBy(itemList, function(item) {
+                if (item.lat && item.lng) {
+                    return calcDistance(position.coords.latitude, position.coords.longitude, item.lat, item.lng);
+                }
+            });
+        }
+        
+        return _.sortBy(itemList, 'done');
     },
 
     canShareList: function() {
@@ -16,6 +40,11 @@ Template.listDetail.helpers({
     	} else {
     		return false;
     	}
+    },
+
+    currentPositionString: function() {
+        var coords = Geolocation.currentLocation().coords;
+        return `${coords.latitude}N ${coords.longitude}E`;
     }
 });
 
