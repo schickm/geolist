@@ -18,10 +18,13 @@ function calcDistance(lat1, lon1, lat2, lon2) {
 
 Template.listDetail.helpers({
     itemsSorted: function() {        
-        var itemList = Items.find({
-                listId: Router.current().params._id
-            }).fetch(),
-            position = Geolocation.currentLocation();
+        var position = Geolocation.currentLocation(),
+            query = {listId: Router.current().params._id};
+
+        if (! Session.get('showCompletedItems')) {
+            query.done = false;
+        }
+        var itemList = Items.find(query).fetch();
 
         if (position) {
             itemList = _.sortBy(itemList, function(item) {
@@ -34,6 +37,10 @@ Template.listDetail.helpers({
         return _.sortBy(itemList, 'done');
     },
 
+    showCompletedItems: function() {
+        return Session.get('showCompletedItems');
+    },
+
     canShareList: function() {
     	if (Lists.findOne({_id: Router.current().params._id, userId: Meteor.userId()})) {
     		return true;
@@ -43,8 +50,10 @@ Template.listDetail.helpers({
     },
 
     currentPositionString: function() {
-        var coords = Geolocation.currentLocation().coords;
-        return `${coords.latitude}N ${coords.longitude}E`;
+        var position = Geolocation.currentLocation();
+        if (position) {
+            return `${position.coords.latitude}N ${position.coords.longitude}E`;
+        }
     }
 });
 
@@ -67,7 +76,9 @@ Template.listDetail.events({
             // blank out the input
             input.value = '';
         });
+    },
 
-        
+    'click .completed-toggle': function() {
+        Session.set('showCompletedItems', ! Session.get('showCompletedItems'));
     }
 });
