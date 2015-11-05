@@ -7,12 +7,11 @@
         {{#each itemsSorted}}
             {{> itemDetail}}
         {{/each}}
-        <li>
-            <form>
-                <input placeholder='+ add item' class='form-control typeahead' type='text' name='item' data-source='items' autocomplete='off' spellcheck='off' />
-            </form>
-        </li>
     </ul>
+
+    <form>
+        <input placeholder='+ add item' class='form-control typeahead' type='text' name='item' data-source='items' autocomplete='off' spellcheck='off' />
+    </form>
 
     <p>{{currentPositionString}}</p>
 

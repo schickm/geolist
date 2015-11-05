@@ -66,7 +66,7 @@ Template.listDetail.helpers({
 Template.listDetail.events({
     'submit form': function submitFormHandler(event) {
         event.preventDefault();
-        var input = event.target.item,
+        let input = event.target.item,
             itemLabel = input.value,
             listItemDoc = {
                 userId: Meteor.userId(),
@@ -86,5 +86,21 @@ Template.listDetail.events({
 
     'click .completed-toggle': function clickCompletedToggleHandler() {
         Session.set('showCompletedItems', ! Session.get('showCompletedItems'));
+    },
+});
+
+Template.listDetail.uihooks({
+    '.item': {
+        move: function onMove(node, next) {
+            $(node).animate({
+                height: 'toggle',
+                opacity: 'toggle',
+            }, 250).promise().done(() =>{
+                $(node).insertBefore(next).animate({
+                    height: 'toggle',
+                    opacity: 'toggle',
+                }, 250);
+            });
+        },
     },
 });
