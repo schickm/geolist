@@ -1,4 +1,8 @@
 /* CSS declarations go here */
+h2 {
+	margin-top: 0;
+}
+
 .action-link {
 	margin: 5px;
 }
@@ -20,6 +24,10 @@ li > label > input {
 	position: relative;
 }
 
+.item-list .done {
+	text-decoration: line-through;
+}
+
 .item-list li.animate {
 	transition: all 300ms 0ms ease-in;
 }
@@ -28,6 +36,13 @@ li > label > input {
 	border-bottom: none;
 }
 
-.item-list input[type=text] {
-	border: none;
+.item-list label {
+	margin: 2.5px 0 2.5px 0;
+	font-size: 26px;
+	font-weight: normal;
+}
+
+.item-list input[type=checkbox] {
+	position: relative;
+	top: -3px;
 }
