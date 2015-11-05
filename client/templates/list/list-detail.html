@@ -13,13 +13,11 @@
         <input placeholder='+ add item' class='form-control typeahead' type='text' name='item' data-source='items' autocomplete='off' spellcheck='off' />
     </form>
 
-    <p>{{currentPositionString}}</p>
-
     {{#if canShareList}}
         {{#linkTo class='action-link' route='shareList' data=list}}
             share with others
         {{/linkTo}}
     {{/if}}
 
-    <a class='completed-toggle' href='#'>{{#if showCompletedItems}}Hide{{else}}Show{{/if}} completed</a>
+    <a class='action-link completed-toggle' href='#'>{{#if showCompletedItems}}hide{{else}}show{{/if}} completed</a>
 </template>

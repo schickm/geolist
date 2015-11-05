@@ -54,13 +54,6 @@ Template.listDetail.helpers({
 
         return false;
     },
-
-    currentPositionString() {
-        let position = Geolocation.currentLocation();
-        if (position) {
-            return `${position.coords.latitude}N ${position.coords.longitude}E`;
-        }
-    },
 });
 
 Template.listDetail.events({
