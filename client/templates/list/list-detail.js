@@ -88,19 +88,3 @@ Template.listDetail.events({
         Session.set('showCompletedItems', ! Session.get('showCompletedItems'));
     },
 });
-
-Template.listDetail.uihooks({
-    '.item': {
-        move: function onMove(node, next) {
-            $(node).animate({
-                height: 'toggle',
-                opacity: 'toggle',
-            }, 250).promise().done(() =>{
-                $(node).insertBefore(next).animate({
-                    height: 'toggle',
-                    opacity: 'toggle',
-                }, 250);
-            });
-        },
-    },
-});
