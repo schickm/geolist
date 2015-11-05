@@ -88,3 +88,38 @@ Template.listDetail.events({
         Session.set('showCompletedItems', ! Session.get('showCompletedItems'));
     },
 });
+
+Template.listDetail.onRendered(function onRendered() {
+    this.find('.item-list')._uihooks = {
+        moveElement(node, next) {
+            let $node = $(node),
+                $next = $(next),
+                oldTop = $node.offset().top,
+                height = $node.outerHeight(true);
+
+            let $inBetween = $next.nextUntil(node);
+            if ($inBetween.length === 0) {
+                $inBetween = $node.nextUntil(next);
+            }
+
+            $node.insertBefore(next);
+
+            let newTop = $node.offset().top;
+
+            $node
+                .removeClass('animate')
+                .css('top', oldTop - newTop);
+
+            $inBetween
+                .removeClass('animate')
+                .css('top', oldTop < newTop ? height : -1 * height);
+
+            // force redraw
+            $node.offset();
+            // reset
+            $node.addClass('animate').css('top', 0);
+            $inBetween.addClass('animate').css('top', 0);
+        },
+    };
+});
+

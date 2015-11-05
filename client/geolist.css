@@ -17,6 +17,11 @@ li > label > input {
 
 .item-list li {
 	border-bottom: 1px solid #ccc;
+	position: relative;
+}
+
+.item-list li.animate {
+	transition: all 300ms 0ms ease-in;
 }
 
 .item-list li:last-of-type {
