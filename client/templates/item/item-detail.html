@@ -1,3 +1,8 @@
 <template name='itemDetail'>
-    <li class='item'><label><input type='checkbox' checked='{{done}}' />{{label}}</label></li>
+    <li class='item'>
+    	<label>
+    		<input type='checkbox' checked='{{done}}' />
+    		<span class='{{#if done}}done{{/if}}'>{{label}}</span>
+    	</label>
+    </li>
 </template>
