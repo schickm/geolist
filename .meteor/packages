@@ -9,7 +9,6 @@ accounts-password
 twbs:bootstrap
 ian:accounts-ui-bootstrap-3
 schickm:helpers
-sergeyt:typeahead
 mdg:geolocation
 dburles:collection-helpers
 standard-minifiers
@@ -28,3 +27,4 @@ spacebars
 check
 zimme:active-route
 ecmascript
+sergeyt:typeahead

@@ -10,7 +10,9 @@
     </ul>
 
     <form>
-        <input placeholder='+ add item' class='form-control typeahead' type='text' name='item' data-source='items' autocomplete='off' spellcheck='off' />
+        <input placeholder='+ add item' class='form-control typeahead'
+         type='text' name='item' data-source='itemTypes' data-select='selected'
+         autocomplete='off' spellcheck='off' />
     </form>
 
     {{#if canShareList}}

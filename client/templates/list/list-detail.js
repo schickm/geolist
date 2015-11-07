@@ -54,27 +54,38 @@ Template.listDetail.helpers({
 
         return false;
     },
+
+    selected(event, suggestion) {
+        console.log(arguments);
+    },
+
+    itemTypes() {
+        return ItemTypes.find().fetch().map(it => it.label);
+    },
 });
 
-Template.listDetail.events({
-    'submit form': function submitFormHandler(event) {
-        event.preventDefault();
-        let input = event.target.item,
-            itemLabel = input.value,
-            listItemDoc = {
-                userId: Meteor.userId(),
-                listId: this.list._id,
-                label: itemLabel,
-                quantity: 1,
-                lat: null,
-                lng: null,
-                done: false,
-            };
+function createItem(itemLabel, listId, callback) {
+    let listItemDoc = {
+        userId: Meteor.userId(),
+        listId: listId,
+        label: itemLabel,
+        quantity: 1,
+        lat: null,
+        lng: null,
+        done: false,
+    };
 
-        Meteor.call('addListItem', listItemDoc, () => {
-            // blank out the input
-            input.value = '';
-        });
+    Meteor.call('addListItem', listItemDoc, callback);
+}
+
+Template.listDetail.events({
+    'keypress input.tt-input': function keypressHandler(event) {
+        // enter key
+        if (event.which === 13) {
+            createItem(event.target.value, this.list._id, () => {
+                event.target.value = '';
+            });
+        }
     },
 
     'click .completed-toggle': function clickCompletedToggleHandler() {
@@ -83,6 +94,8 @@ Template.listDetail.events({
 });
 
 Template.listDetail.onRendered(function onRendered() {
+    Meteor.typeahead.inject();
+
     this.find('.item-list')._uihooks = {
         moveElement(node, next) {
             let $node = $(node),
