@@ -56,7 +56,9 @@ Template.listDetail.helpers({
     },
 
     selected(event, suggestion) {
-        console.log(arguments);
+        createItem(suggestion.value, this.list._id, () => {
+            event.target.value = '';
+        });
     },
 
     itemTypes() {
