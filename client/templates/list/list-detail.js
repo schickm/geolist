@@ -61,8 +61,13 @@ Template.listDetail.helpers({
         });
     },
 
-    itemTypes() {
-        return ItemTypes.find().fetch().map(it => it.label);
+    itemTypes(query, sync) {
+        let label = query.match(/(?:(\d+)?\s+)?(.*)/)[2];
+
+        sync(ItemTypes
+            .find({label: {'$regex': `.*${label}.*`}})
+            .fetch()
+            .map(it => { return {value: it.label}; }));
     },
 });
 
@@ -85,9 +90,19 @@ Template.listDetail.events({
         // enter key
         if (event.which === 13) {
             createItem(event.target.value, this.list._id, () => {
-                event.target.value = '';
+                $(event.target).typeahead('val', '');
             });
         }
+    },
+
+    'focus input.tt-input': function focusHandler(event) {
+        let windowHeight = $(window).height(),
+            $input = $(event.target),
+            inputBottom = $input.offset().top + $input.outerHeight();
+
+        $('html, body').animate({
+            scrollTop: inputBottom - windowHeight,
+        }, 100);
     },
 
     'click .completed-toggle': function clickCompletedToggleHandler() {

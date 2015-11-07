@@ -1,19 +1,17 @@
 <template name='listDetail'>
-    <h2>
-        {{list.name}}
-    </h2>
+    <form>
+        <div class='form-group form-group-lg'>
+            <input placeholder='+ add item' class='form-control typeahead'
+             type='text' name='itemTypes' data-source='itemTypes' data-select='selected'
+             autocomplete='off' spellcheck='off' />
+        </div>
+    </form>
 
     <ul class='item-list'>
         {{#each itemsSorted}}
             {{> itemDetail}}
         {{/each}}
     </ul>
-
-    <form>
-        <input placeholder='+ add item' class='form-control typeahead'
-         type='text' name='item' data-source='itemTypes' data-select='selected'
-         autocomplete='off' spellcheck='off' />
-    </form>
 
     {{#if canShareList}}
         {{#linkTo class='action-link' route='shareList' data=list}}
