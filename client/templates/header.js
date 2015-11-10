@@ -1,6 +1,8 @@
 Template.header.helpers({
     title() {
-        return (Router.current().route.getName() === 'listDetail' && this.list)  ?
+        const listRoutes = ['listDetail', 'shareList'];
+        return (listRoutes.indexOf(Router.current().route.getName()) !== -1 &&
+                this.list) ?
             this.list.name : 'GeoList';
     },
 });
