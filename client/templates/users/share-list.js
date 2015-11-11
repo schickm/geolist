@@ -2,14 +2,12 @@
 Template.shareList.events({
     'submit form': function handleSubmit(event) {
         event.preventDefault();
+        let input = event.target.email;
         Meteor.call('shareListWithUser',
             this.list._id,
-            event.target.email.value,
-            true,
+            input.value,
             (err) => {
-                if (err) {
-                    console.log(err);
-                }
+                input.value = '';
             }
         );
     },

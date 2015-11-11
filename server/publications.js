@@ -29,11 +29,11 @@ Meteor.publish('userItemTypes', function userItemTypes(listId) {
 
 
 Meteor.publish('listSharedUsers', function listSharedUsers(listId) {
-    let list = Lists.findOne(listId, {fields: {'sharedUsers': 1}});
-
-    return Meteor.users.find({
-        '_id': {$in: list.sharedUsers},
-    }, {
-        fields: {'emails.address': 1},
-    });
+    this.related(list => {
+        return Meteor.users.find({
+            '_id': {$in: list.sharedUsers},
+        }, {
+            fields: {'emails.address': 1},
+        });
+    }, Lists.find(listId, {fields: {'sharedUsers': 1}}));
 });
