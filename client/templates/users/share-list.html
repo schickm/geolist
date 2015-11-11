@@ -1,15 +1,21 @@
 <template name='shareList'>
-	<h2>Share with other people</h2>
+    <h2>Share with other people</h2>
 
-	<form>
+    <form>
         <div class='form-group form-group-lg'>
             <input placeholder='email address' class='form-control'
              type='email' name='email' />
         </div>
     </form>
-	<ul>
-	    {{#each users}}
-	        {{> userDetail}}
-	    {{/each}}
-	</ul>
+    <ul>
+        {{#if users.count}}
+            {{#each users}}
+                {{> userDetail}}
+            {{/each}}
+        {{else}}
+            <p>You're not sharing this list with anyone.</p>
+
+            <p>Enter an email address above to share it with them.</p>
+        {{/if}}
+    </ul>
 </template>

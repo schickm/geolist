@@ -23,11 +23,6 @@ Template.userDetail.helpers({
 
 Template.userDetail.events({
     'click button': function changeInputHandler() {
-        Meteor.call('removeListFromUser',
-            currentListId(),
-            this._id,
-            () => {
-                Meteor.subscribe('listSharedUsers', currentListId());
-            });
+        Meteor.call('removeListFromUser', currentListId(), this._id);
     },
 });

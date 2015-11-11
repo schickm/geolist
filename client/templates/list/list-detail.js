@@ -56,7 +56,7 @@ Template.listDetail.helpers({
     },
 
     selected(event, suggestion) {
-        createItem(suggestion.value, this.list._id, () => {
+        createItem(suggestion.value, this._id, () => {
             event.target.value = '';
         });
     },
@@ -89,7 +89,7 @@ Template.listDetail.events({
     'keypress input.tt-input': function keypressHandler(event) {
         // enter key
         if (event.which === 13) {
-            createItem(event.target.value, this.list._id, () => {
+            createItem(event.target.value, this._id, () => {
                 $(event.target).typeahead('val', '');
             });
         }
